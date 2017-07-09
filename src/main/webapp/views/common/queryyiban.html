@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>已办任务列表</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../components/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../components/ace/css/L5-all.css">
+		<link rel="stylesheet" href="../../components/ace/css/font-awesome.css">
+		<link rel="stylesheet" href="../../components/ace/css/ace.onpage-help.css">
+		<link rel="stylesheet" href="../../components/ace/css/select2.css">
+		<link rel="stylesheet" href="../../components/ace/css/ace-fonts.css">
+		<link rel="stylesheet" href="../../components/ace/css/index.css">
+		<link rel="stylesheet" href="../../components/ace/css/ace.css">
+	</head>
+	<body class="no-skin L5-chrome" style="width:1120px;">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="page-content">
+						<div class="row-fluid tabbable">
+							<ul class="nav nav-tabs padding-12 tab-color-blue background-blue">
+								<li class="active">
+									<a href="#" data-toggle="tab">已办任务列表</a>
+								</li>
+							</ul>
+							<div class="tab-content" style="padding:0px;">
+								<div id="daibanPanel" class="tab-pane in active">
+									<div class="well" style="padding: 5px;margin:2px 2px 0px;">
+										<form>
+											<table width="100%">
+												<tbody>
+													<tr>
+														<td width="10%">
+															<label class="text-center">标题:</label>
+														</td>
+														<td>
+															<input type="text" id="subject" size="90">
+														</td>
+														<td width="15%">
+															<button class="btn btn-success btn-sm pull-right" onClick="search();return false;">
+																<i class="ace-icon glyphicon glyphicon-search"></i>
+																查询
+															</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</form>
+									</div><!-- 查询块 -->
+								</div><!-- daibanpanel -->
+								<div id="daibanGridPanel" style="border-left:1px solid #e1e1e1;margin-top:5px;">
+									<div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all">
+										<div class="ui-state-default ui-jqgrid-hdiv" style="width:1084px;">
+											<div class="ui-jqgrid-hbox">
+												<table class="ui-jqgrid-htable" role="grid">
+													<thead>
+														<tr class="ui-jqgrid-labels" role="rowheader">
+															<th id="daiban_table_subject" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width:308px;">
+																<div class="ui-jqgrid-sortable text-center">
+																	标题
+																</div>
+															</th>
+															<th id="daiban_table_createTime" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width:308px;">
+																<div class="ui-jqgrid-sortable text-center">
+																	结束时间
+																</div>
+															</th>
+															<th id="daiban_table_actDefName" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width:308px;">
+																<div class="ui-jqgrid-sortable text-center">
+																	已办环节
+																</div>
+															</th>
+															<th id="daiban_table_preActDefNames" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width:308px;">
+																<div class="ui-jqgrid-sortable text-center">
+																	当前活动环节
+																</div>
+															</th>
+															<th id="daiban_table_preOrganNames" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width:308px;">
+																<div class="ui-jqgrid-sortable text-center">
+																	当前活动环节处理人
+																</div>
+															</th>
+														</tr>
+													</thead>
+												</table>
+											</div>
+										</div>
+										<div class="ui-jqgrid-bdiv" style="height:617.36px;width:1084px;overflow: scroll;overflow-x: hidden;">
+											<div class="ui-pager-control" role="group">	
+											</div>
+										</div><!-- 表格信息内容块 -->
+									</div><!-- 表格头加表格信息 -->
+                                   	<div class="ui-state-default ui-jqgrid-pager ui-corner-bottom" dir="ltr" style="width:1084px;background-color: #f8efec;">
+                                   		<div class="row">
+                                   			<div class="col-md-4"></div>
+                                   			<div class="col-md-5">
+                                   				<table class="ui-pg-table" role="row">
+													<tbody>
+														<tr>
+															<td class="ui-pg-button ui-corner-all ui-state-disabled">
+																<span class="ui-icon ace-icon fa fa-angle-double-left bigger-140"></span>
+															</td>
+															<td class="ui-pg-button ui-corner-all ui-state-disabled">
+																<span class="ui-icon ace-icon fa fa-angle-left bigger-140"></span>
+															</td>
+															<td class="ui-pg-button ui-state-disabled">
+																<span class="ui-separator"></span>
+															</td>
+															<td dir="ltr">
+																当前页数
+																<input class="ui-pg-input" type="text" size="2" maxlength="7" value="0" role="textbox">
+																总页数
+																<span id="sp_1_daiban-pager">0</span>
+															</td>
+															<td class="ui-pg-button ui-state-disabled">
+																<span class="ui-separator"></span>
+															</td>
+															<td class="ui-pg-button ui-corner-all ui-state-disabled">
+																<span class="ui-icon ace-icon fa fa-angle-right bigger-140"></span>
+															</td>
+															<td class="ui-pg-button ui-corner-all ui-state-disabled">
+																<span class="ui-icon ace-icon fa fa-angle-double-right bigger-140"></span>
+															</td>
+															<td dir="ltr">
+																<select class="ui-pg-selbox" role="listbox">
+																	<option role="option" value="15" selected="selected">15</option>
+																	<option role="option" >20</option>
+																	<option role="option" >30</option>
+																</select>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+                                   			</div>
+                                   			<div class="col-md-3"></div>	
+                                   		</div>
+                                   	</div><!-- 分页 -->
+								</div><!-- daibanGridPanel -->
+							</div><!-- tab-content -->
+						</div>
+					</div><!-- page-content -->
+				</div><!-- main-content-inner -->
+			</div><!-- main-content -->
+		</div><!-- main-container -->
+	</body>
+</html>

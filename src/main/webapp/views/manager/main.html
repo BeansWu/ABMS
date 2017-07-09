@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>福师大资产预算管理系统</title>
+		<link rel="stylesheet" href="../../css/L5-all.css">
+		<link rel="stylesheet" href="../../css/bootstrap.css">
+		<link rel="stylesheet" href="../../css/font-awesome.css">
+		<link rel="stylesheet" href="../../css/ace.onpage-help.css">
+		<link rel="stylesheet" href="../../css/select2.css">
+		<link rel="stylesheet" href="../../css/ace-fonts.css">
+		<link rel="stylesheet" href="../../css/index.css">
+		<link rel="stylesheet" href="../../css/ace.css">
+	</head>
+	<body class="no-skin L5-chrome">
+		<div class="navbar navbar-default" style="background-color: #e4e6e9">
+			<div class="container-fluid">
+				<div class="navbar-header pull-left">
+					<a href="#" class="navbar-brand">
+						<h2>福师大资产预算管理系统</h2>
+					</a>
+				</div>
+				<div class="collapse navbar-collapse pull-right">
+					<form class="navbar-form navbar-left">
+						<span class="glyphicon glyphicon-user" style="font-size: 20px;margin-right: 20px;"></span>
+						<div class="form-group">
+							<input type="text" class="form-control text-center" value="吴忠恩" readonly="">
+						</div>
+						<button type="submit" class="btn btn-primary">注销</button>
+					</form>
+				</div>
+			</div>
+		</div><!-- 导航栏 -->
+		<div class="main-container">
+			<div id="sidebar" class="sidebar responsive" data-sidebar="true" data-sidebar-scroll="true" data-sidebar-hover="true">
+				<ul class="nav nav-list" id="menu" style="top:0px;">
+					<li>
+						<a href="#">
+							<i class="menu-icon fa fa-home home-icon"></i>
+							<span class="menu-text">首页</span>
+						</a>
+					</li><!-- 主菜单-首页 -->
+					<li class="open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-users"></i>
+							<span class="menu-text">我的任务</span>
+							<b class="arrow fa fa-angle-down"></b>
+							<!-- <span class="badge badge-important pull-right" style="margin-right: 50px">1</span> -->
+						</a>
+						<b class="arrow"></b>
+						<ul class="submenu nav-show" style="display: block;">
+							<li>
+								<a href="querydaiban.html" target="myiframe">
+									<i class="menu-icon fa fa-caret-right"></i>
+									"待办任务"
+									<!-- <span class="badge badge-important pull-right" style="margin-right: 50px;">1</span> -->
+								</a>
+								<b class="arrwo"></b>
+							</li><!-- 待办任务-->
+							<li>
+								<a href="queryyiban.html" target="myiframe">
+									<i class="menu-icon fa fa-caret-right"></i>
+									"已办任务"
+								</a>
+								<b class="arrow"></b>
+							</li><!-- 已办任务-->
+						</ul><!--子菜单-->				
+					</li><!-- 主菜单-我的任务 -->
+					
+					<li class="open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-pencil-square-o"></i>
+							<span class="menu-text">采购管理</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+						<ul class="submenu nav-show" style="display: block;">
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									管理采购计划申购表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									输出采购计划申购表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									填写中标结果信息登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									管理中标结果信息登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									填写评标结果信息登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									管理评标结果信息登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									填写合同会签封面登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									管理合同会签封面登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									填写验收报告相关信息登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									管理验收报告相关信息登记表
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</ul><!--子菜单-->
+					</li><!--主菜单-计划管理-->
+					<li class="open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon glyphicon glyphicon-cog"></i>
+							<span class="menu-text">导出报表</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+						<ul class="submenu nav-show" style="display: block;">
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									预算拟自行采购项目信息表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="#" target="myiframe">
+									<i class="menu-icon fa fa-caret-right"></i>
+									预算未执行的采购项目信息表
+								</a>
+							</li>
+							
+							<li>
+								<a href="#" target="myiframe">
+									<i class="menu-icon fa fa-caret-right"></i>
+									各品目预算拟自行采购项目信息表
+								</a>
+							</li>
+						</ul><!--子菜单-->
+					</li><!--主菜单-个人设置-->	
+					<li class="open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon glyphicon glyphicon-cog"></i>
+							<span class="menu-text">个人设置</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+						<ul class="submenu nav-show" style="display: block;">
+							<li>
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									"修改个人资料"
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="updatepassword.html" target="myiframe">
+									<i class="menu-icon fa fa-caret-right"></i>
+									"修改我的密码"
+								</a>
+							</li>
+						</ul><!--子菜单-->
+					</li><!--主菜单-个人设置-->
+				</ul>
+				<div class="sidebar-toggle sidebar-collapse">
+					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div><!-- 收放菜单 -->
+			</div><!--左侧菜单块-->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="breadcrumbs">
+						<ul class="breadcrumbs">
+							<li style="font-size: 15px;">
+								<i class="ace-icon fa fa-home home-icon"></i>
+								  > 预算管理 > 预算修改
+							</li>
+						</ul>
+					</div><!-- 面包屑导航 -->
+					<iframe src="" frameborder="0" style="width:100%;height:1080px;" scrolling="no" name="myiframe">
+				</div>
+			</div><!--右侧主要内容-->
+		</div><!--主界面块-->
+	</body>
+</html>
