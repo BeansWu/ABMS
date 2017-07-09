@@ -1,0 +1,83 @@
+.top-r {
+	width: 375px;
+	height: 55px;
+	float: right;
+	margin-top: 31px;
+	}
+.top-rt {
+	color: #FFFFFF;
+	font-size: 14px;
+	line-height: 29px;
+	width: 227px;
+	height: 29px;
+	background: url("./images/indeximges/text.png") no-repeat;
+	position: relative;
+	margin-left: 80px;
+}
+.logo {
+	width: 700px;
+	height: 80px;
+	margin-left: 15px;
+	background: url("./images/indeximges/tit.gif") no-repeat;
+	float: left;
+	margin-top: 9px;
+}
+.tc {
+	position: absolute;
+	top: -1px;
+	background: url("./images/indeximges/icon-1.png"); 
+} 
+.tca {
+	position: absolute;
+	right: -70px;
+	width: 70px;
+	height: 31px;
+	background: url("./images/indeximges/icon-1.png") repeat;
+	background-size: 100% 100%;
+	color: #fff;
+	top: -1px;
+	text-align: center;
+}
+.text {
+	margin-left: 10px;
+	float: left;
+	}
+	
+.top-rp {
+	width: 305px;
+	height: 29px;
+	position: absolute;
+	top: 70px;
+	right: -0px;
+	}
+	
+.top-rp .yw {
+	float: left;
+	color: #fff;
+	font-size: 14px;
+	background: url("./images/indeximges/sa.png") no-repeat;
+	padding-left: 30px;
+	}
+.top-rp .yw a
+{
+	color:#fff;
+}
+.top-rp .yw a:focus {
+	color: #fff;
+	}
+.top-rp .bs {
+	float: left;
+	color: #fff;
+	font-size: 14px;
+	background: url("./images/indeximges/sa1.png") no-repeat;
+	padding-left: 30px;
+	margin-right: 60px;
+	margin-left: 35px;
+	}
+.top-rp .bs a
+{
+	color:#fff;
+}
+.top-rp .bs a:focus {
+	color: #fff;
+	}
