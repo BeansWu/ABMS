@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- 方言 -->
+    <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    <!-- 设定JDBC的Statement读取数据的时候每次从数据库中取出的记录条数：影响尚未探究 -->
+    <property name="jdbc.batch_size">20</property>
+    <!-- 显示与格式化 sql 语句 -->
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <!-- 更新策略 -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="connection.useUnicode">true</property>
+    <property name="connection.characterEncoding">UTF-8</property>
+    <!-- 缓存设置：影响尚未探究 -->
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
+  </session-factory>
+</hibernate-configuration>
