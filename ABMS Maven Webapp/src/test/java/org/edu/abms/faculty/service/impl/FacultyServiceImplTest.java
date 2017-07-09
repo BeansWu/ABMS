@@ -35,7 +35,7 @@ public class FacultyServiceImplTest {
 
     @Test
     public void del() throws Exception {
-
+    	System.out.println("1");
     }
 
     @Test
