@@ -30,6 +30,13 @@ public interface BudgetAppDao {
      * @return 操作结果
      */
     boolean del(Integer BudgetAppId);
+    
+    /** 
+     *  查询预算申请
+     * @param:  BudgetAppId    
+     * @return: 操作结果     
+     */
+    BudgetApp get(Integer budgetAppId);
 
     /**
      * 查询当前用户的所有预算申请记录

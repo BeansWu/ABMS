@@ -1,11 +1,11 @@
 package org.edu.abms.budget.dao.impl;
 
+import java.util.List;
+
 import org.edu.abms.budget.dao.BudgetAppDao;
 import org.edu.abms.budget.entity.BudgetApp;
 import org.edu.abms.common.dao.BaseDao;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @Description: 预算申请 dao impl
@@ -33,4 +33,10 @@ public class BudgetAppDaoImpl extends BaseDao implements BudgetAppDao{
     public List<BudgetApp> findAll(Integer userId) {
         return query("from BudgetApp ba where ba.user.id = ?", userId);
     }
+
+	@Override
+	public BudgetApp get(Integer budgetAppId) {
+		return super.queryForBean("from BudgetApp ba where ba.id = ?", budgetAppId);
+
+	}
 }

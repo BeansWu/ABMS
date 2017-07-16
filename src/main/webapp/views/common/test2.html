@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>采购品目测试</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div id="app">
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Code</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="item in purchaseItems">
+						<td>{{ item.id }}</td>
+						<td>{{ item.name }}</td>
+						<td>{{ item.code }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript" src="../../components/jquery/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="../../components/vue/vue.js"></script>
+		<script type="text/javascript" src="../../js/purchase/purchaseItem.js"></script>
+	</body>
+</html>

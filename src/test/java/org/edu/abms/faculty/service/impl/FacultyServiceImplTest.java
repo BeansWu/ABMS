@@ -30,6 +30,7 @@ public class FacultyServiceImplTest {
     @Test
     public void saveOrUpdate() throws Exception {
         Faculty faculty = new Faculty("01", "光电与信息工程学院", "光电学院", "GDYXXGCXY");
+        System.out.println(faculty.getId()==null?"空":"非空");
         facultyService.saveOrUpdate(faculty);
     }
 

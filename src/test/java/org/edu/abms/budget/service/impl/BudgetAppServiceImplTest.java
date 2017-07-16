@@ -1,5 +1,6 @@
 package org.edu.abms.budget.service.impl;
 
+import org.edu.abms.budget.entity.BudgetApp;
 import org.edu.abms.budget.service.BudgetAppService;
 import org.junit.After;
 import org.junit.Before;
@@ -25,6 +26,12 @@ public class BudgetAppServiceImplTest {
     @After
     public void tearDown() throws Exception {
         ctx.close();
+    }
+    
+    @Test
+    public void get() throws Exception {
+    	BudgetApp budgetApp = budgetAppService.get(1);
+    	System.out.println(budgetApp);
     }
 
     @Test

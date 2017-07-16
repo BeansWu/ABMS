@@ -1,13 +1,13 @@
 package org.edu.abms.budget.service.impl;
 
+import java.util.List;
+
 import org.edu.abms.budget.dao.BudgetAppDao;
 import org.edu.abms.budget.entity.BudgetApp;
 import org.edu.abms.budget.service.BudgetAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * @Description: 预算申请 service impl
@@ -40,4 +40,10 @@ public class BudgetAppServiceImpl implements BudgetAppService{
     public List<BudgetApp> findAll(Integer userId) {
         return budgetAppDao.findAll(userId);
     }
+
+    @Transactional
+	@Override
+	public BudgetApp get(Integer budgetAppId) {
+		return budgetAppDao.get(budgetAppId);
+	}
 }

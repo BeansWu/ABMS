@@ -121,7 +121,11 @@ public class BudgetApp implements Serializable {
         this.auditState = auditState;
     }
 
-    public BudgetApp(String number, String name, String requiredTime, User user, Date fillDate, String reason) {
+    public BudgetApp() {
+		super();
+	}
+
+	public BudgetApp(String number, String name, String requiredTime, User user, Date fillDate, String reason) {
         this.number = number;
         this.name = name;
         this.requiredTime = requiredTime;

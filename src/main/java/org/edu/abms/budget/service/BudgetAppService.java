@@ -23,6 +23,13 @@ public interface BudgetAppService {
      * @return 操作结果
      */
     boolean del(Integer budgetAppId);
+    
+    /** 
+     *  查询预算申请
+     * @param:  budgetAppId   
+     * @return: 操作结果     
+     */
+    BudgetApp get(Integer budgetAppId);
 
     /**
      * 查询当前用户的所有预算申请记录
