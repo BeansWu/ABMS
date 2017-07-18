@@ -1,5 +1,6 @@
 package org.edu.abms.purchase.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.edu.abms.purchase.entity.PurchaseItem;
@@ -32,8 +33,16 @@ public interface PurchaseItemDao {
 	PurchaseItem findByCode(String code);
 	
 	/** 
-	 *  查找所有品目信息   
-	 * @return: 操作结果     
+	 *  查找所有品目信息
+	 * @return: 操作结果
 	 */
 	List<PurchaseItem> findAll();
+
+	/**
+	 * 资产管理部门修改全校同品目编码下自行采购项目的预算限制
+	 * @param code
+	 * @param newAmountLimit
+	 * @return: 修改是否成功：成功（true），失败（false）
+	 */
+	boolean modifyPurchaseItemAmountLimit(String code, BigDecimal newAmountLimit);
 }

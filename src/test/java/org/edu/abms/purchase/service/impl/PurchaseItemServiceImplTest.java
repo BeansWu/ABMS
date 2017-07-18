@@ -3,9 +3,12 @@ package org.edu.abms.purchase.service.impl;
 import org.edu.abms.purchase.entity.PurchaseItem;
 import org.edu.abms.purchase.service.PurchaseItemService;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.math.BigDecimal;
 
 /** 
  * @Description:   
@@ -29,8 +32,14 @@ public class PurchaseItemServiceImplTest {
 	
 	@Test
 	public void saveOrUpdate() throws Exception {
-		PurchaseItem purchaseItem =new PurchaseItem("A01", "土地");
+		PurchaseItem purchaseItem =new PurchaseItem("A03", "土地");
 		System.out.println(purchaseItem.getId()==null?"空":"非空");
 		purchaseItemService.saveOrUpdate(purchaseItem);
 	}
+
+	@Test
+    public void modifyPurchaseItemAmountLimit(){
+	    BigDecimal bigDecimal = new BigDecimal("120.00");
+	    Assert.assertTrue(purchaseItemService.modifyPurchaseItemAmountLimit("A03",bigDecimal));
+    }
 }

@@ -1,10 +1,7 @@
 package org.edu.abms.purchase.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -13,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -52,7 +48,13 @@ public class PurchaseItem implements Serializable{
 	 */
 	@Column(name = "money_start", nullable = true)
 	private Integer moneyStart;
-	
+
+	/**
+	 * 全校预算（单位：万元）
+	 */
+	@Column(name = "amount_limit", nullable = true,columnDefinition = "decimal(9,2) DEFAULT '100.00'")
+	private BigDecimal AmountLimit;
+
 	/**
 	 * 说明
 	 */
@@ -113,7 +115,16 @@ public class PurchaseItem implements Serializable{
 	public void setParentItem(PurchaseItem parentItem) {
 		this.parentItem = parentItem;
 	}
-	
+
+
+	public BigDecimal getAmountLimit() {
+		return AmountLimit;
+	}
+
+	public void setAmountLimit(BigDecimal amountLimit) {
+		AmountLimit = amountLimit;
+	}
+
 	public PurchaseItem() {
 		super();
 	}

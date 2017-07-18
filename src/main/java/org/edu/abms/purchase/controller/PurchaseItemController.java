@@ -1,9 +1,11 @@
 package org.edu.abms.purchase.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.edu.abms.purchase.entity.PurchaseItem;
 import org.edu.abms.purchase.service.PurchaseItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +17,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/purchaseItem")
 public class PurchaseItemController {
-	
-	private static String SUCCESS = "{\"result\":\"success\"}";
-	private static String FAILURE = "{\"result\":\"failure\"}";
-	
-	@Autowired
-	private PurchaseItemService purchaseService;
-	
-	@ResponseBody
-	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
-	public Map<String,Object> findAll(){		
-		Map<String,Object> map = new HashMap<String,Object>();
-		List<PurchaseItem> purchaseItems =purchaseService.findAll(1);
-		map.put("purchaseItems", purchaseItems);
-		return map;
-	}
-	
+
+    private static String SUCCESS = "{\"result\":\"success\"}";
+    private static String FAILURE = "{\"result\":\"failure\"}";
+
+    @Autowired
+    private PurchaseItemService purchaseItemService;
+
+    @ResponseBody
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    public Map<String, Object> findAll() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<PurchaseItem> purchaseItems = purchaseItemService.findAll(1);
+        map.put("purchaseItems", purchaseItems);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/modifyPurchaseItemAmountLimit")
+    public String modifyPurchaseItemAmountLimit(String code, String newAmountLimit) {
+        BigDecimal bigDecimal = new BigDecimal(newAmountLimit);
+        if (purchaseItemService.modifyPurchaseItemAmountLimit(code, bigDecimal)) {
+            return SUCCESS;
+        } else {
+            return FAILURE;
+        }
+    }
+
 
 }

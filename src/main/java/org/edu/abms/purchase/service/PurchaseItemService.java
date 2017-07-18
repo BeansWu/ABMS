@@ -1,5 +1,6 @@
 package org.edu.abms.purchase.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.edu.abms.purchase.entity.PurchaseItem;
@@ -23,4 +24,11 @@ public interface PurchaseItemService {
 	 * @return: 子品目集合     
 	 */
 	List<PurchaseItem> findAll(Integer fatherId);
+
+	/**
+	 * 资产管理部门修改全校同品目编码下自行采购品目的总预算金额
+	 * @param code
+	 * @param newAmountLimit
+	 */
+	boolean modifyPurchaseItemAmountLimit(String code, BigDecimal newAmountLimit);
 }

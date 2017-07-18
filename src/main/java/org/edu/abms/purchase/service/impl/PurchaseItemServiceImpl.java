@@ -1,5 +1,6 @@
 package org.edu.abms.purchase.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.edu.abms.purchase.dao.PurchaseItemDao;
@@ -21,9 +22,14 @@ public class PurchaseItemServiceImpl implements PurchaseItemService{
 	private PurchaseItemDao purchaseItemDao;
 
 	@Override
+	public boolean modifyPurchaseItemAmountLimit(String code, BigDecimal newAmountLimit) {
+		return purchaseItemDao.modifyPurchaseItemAmountLimit(code, newAmountLimit);
+	}
+
+	@Override
 	@Transactional
 	public boolean saveOrUpdate(PurchaseItem purchaseItem) {
-		if (purchaseItem.getId() == null) {
+		if (purchaseItem.getCode() == null) {
 			return purchaseItemDao.save(purchaseItem);
 		} else {
 			return purchaseItemDao.update(purchaseItem);
