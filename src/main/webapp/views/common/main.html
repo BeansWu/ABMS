@@ -1,190 +1,187 @@
 <!doctype html>
-<html lang="en">
+<html>
 	<head>
 		<meta charset="UTF-8">
 		<title>福师大资产预算管理系统</title>
-		<link rel="stylesheet" href="../../components/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../../components/ace/css/L5-all.css">
-		<link rel="stylesheet" href="../../components/ace/css/font-awesome.css">
-		<link rel="stylesheet" href="../../components/ace/css/ace.onpage-help.css">
-		<link rel="stylesheet" href="../../components/ace/css/select2.css">
-		<link rel="stylesheet" href="../../components/ace/css/ace-fonts.css">
-		<link rel="stylesheet" href="../../components/ace/css/index.css">
-		<link rel="stylesheet" href="../../components/ace/css/ace.css">
-	</head>
-	<body class="no-skin L5-chrome">
-		<div class="navbar navbar-default" style="background-color: #e4e6e9">
-			<div class="container-fluid">
-				<div class="navbar-header pull-left">
-					<a href="#" class="navbar-brand">
-						<h2>福师大资产预算管理系统</h2>
-					</a>
-				</div>
-				<div class="collapse navbar-collapse pull-right">
-					<form class="navbar-form navbar-left">
-						<span class="glyphicon glyphicon-user" style="font-size: 20px;margin-right: 20px;"></span>
-						<div class="form-group">
-							<input type="text" class="form-control text-center" value="吴忠恩" readonly="">
-						</div>
-						<button type="submit" class="btn btn-primary">注销</button>
-					</form>
-				</div>
-			</div>
-		</div><!-- 导航栏 -->
-		<div class="main-container">
-			<div id="sidebar" class="sidebar responsive" data-sidebar="true" data-sidebar-scroll="true" data-sidebar-hover="true">
-				<ul class="nav nav-list" id="menu" style="top:0px;">
-					<li>
-						<a href="#">
-							<i class="menu-icon fa fa-home home-icon"></i>
-							<span class="menu-text">首页</span>
-						</a>
-					</li><!-- 主菜单-首页 -->
-					<li class="open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-users"></i>
-							<span class="menu-text">我的任务</span>
-							<b class="arrow fa fa-angle-down"></b>
-							<!-- <span class="badge badge-important pull-right" style="margin-right: 50px">1</span> -->
-						</a>
-						<b class="arrow"></b>
-						<ul class="submenu nav-show" style="display: block;">
-							<li>
-								<a href="querydaiban.html" target="myiframe">
-									<i class="menu-icon fa fa-caret-right"></i>
-									"待办任务"
-									<!-- <span class="badge badge-important pull-right" style="margin-right: 50px;">1</span> -->
-								</a>
-								<b class="arrwo"></b>
-							</li><!-- 待办任务-->
-							<li>
-								<a href="queryyiban.html" target="myiframe">
-									<i class="menu-icon fa fa-caret-right"></i>
-									"已办任务"
-								</a>
-								<b class="arrow"></b>
-							</li><!-- 已办任务-->
-						</ul><!--子菜单-->				
-					</li><!-- 主菜单-我的任务 -->
-					<li class="open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-gavel"></i>
-							<span class="menu-text">预算管理</span>
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-						<b class="arrow"></b>
-						<ul class="submenu nave-show" style="display: block;">
-							<li>
-								<a href="budget_application_form.html" target="myiframe">
-									<i class="menu-icon fa fa-caret-right"></i>
-										填写预算申请表
-								</a>
-								<b class="arrow"></b>	
-							</li>
-							<li>
-								<a href="budget_application_change.html" target="myiframe">
-									<i class="menu-icon fa fa-caret-right"></i>
-										管理预算申请表
-								</a>
-								<b class="arrow"></b>
-							</li>
-						</ul><!-- 子菜单 -->
-					</li><!--主菜单-预算管理-->
-					<li class="open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-pencil-square-o"></i>
-							<span class="menu-text">采购管理</span>
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-						<b class="arrow"></b>
-						<ul class="submenu nav-show" style="display: block;">
-							<li>
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									填写采购计划申购表
-								</a>
-								<b class="arrow"></b>
-							</li>
-							<li>
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									管理采购计划申购表
-								</a>
-								<b class="arrow"></b>
-							</li>
-							<li>
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									填写采购项目询价表
-								</a>
-								<b class="arrow"></b>
-							</li>
-							<li>
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									管理采购项目询价表
-								</a>
-								<b class="arrow"></b>
-							</li>
 
-							<li>
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									填写购置贵重仪器论证报告
-								</a>
-								<b class="arrow"></b>
-							</li>
-							<li>
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									管理购置贵重仪器论证报告
-								</a>
-								<b class="arrow"></b>
-							</li>
-							
-						</ul><!--子菜单-->
-					</li><!--主菜单-计划管理-->	
-					<li class="open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon glyphicon glyphicon-cog"></i>
-							<span class="menu-text">个人设置</span>
-							<b class="arrow fa fa-angle-down"></b>
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/font-awesome.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/bootstrap/css/bootstrap.min.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-rtl.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-skins.min.css">
+
+		<script type="text/javascript" src="../../components/jquery/jquery-1.11.2.min.js"></script>
+
+		<script type="text/javascript" src="../../components/bootstrap/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="../../components/ace/js/ace-elements.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace-extra.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace.min.js"></script>
+
+	</head>
+	<body>
+		<div class="navbar navbar-default">
+			<div class="navbar-header pull-left">
+				<a href="#" class="navbar-brand">
+					<small>
+						<i class="icon-group"></i>
+						福师大资产预算管理系统
+					</small>
+				</a>
+			</div>
+			<div class="navbar-header pull-right">
+				<ul class="nav ace-nav">
+					<li class="grey">
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+							内部测试人员
+							<i class="icon-caret-down"></i>
 						</a>
-						<b class="arrow"></b>
-						<ul class="submenu nav-show" style="display: block;">
+						<ul class="user-menu pull-right dropdown-menu dropdown-caret dropdown-close">
 							<li>
 								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									"修改个人资料"
+									<i class="icon-cog"></i>
+									设置
 								</a>
-								<b class="arrow"></b>
 							</li>
 							<li>
-								<a href="updatepassword.html" target="myiframe">
-									<i class="menu-icon fa fa-caret-right"></i>
-									"修改我的密码"
+								<a href="#">
+									<i class="icon-user"></i>
+									个人信息
 								</a>
 							</li>
-						</ul><!--子菜单-->
-					</li><!--主菜单-个人设置-->
-				</ul>
-				<div class="sidebar-toggle sidebar-collapse">
-					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-				</div><!-- 收放菜单 -->
-			</div><!--左侧菜单块-->
-			<div class="main-content">
-				<div class="main-content-inner">
-					<div class="breadcrumbs">
-						<ul class="breadcrumbs">
-							<li style="font-size: 15px;">
-								<i class="ace-icon fa fa-home home-icon"></i>
-								  > 预算管理 > 预算修改
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<i class="icon-off"></i>
+									注销
+								</a>
 							</li>
 						</ul>
-					</div><!-- 面包屑导航 -->
-					<iframe src="" frameborder="0" style="width:100%;height:1080px;" scrolling="no" name="myiframe">
-				</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-container">
+			<div class="main-container-inner">
+				<a href="#" class="menu-toggler">
+					<span class="menu-text"></span>
+				</a>
+				<div class="sidebar">
+					<ul class="nav nav-list">
+						<li>
+							<a href="#">
+								<i class="icon-home" aria-hidden="true"></i>
+								<span class="menu-text">首页</span>
+							</a>
+						</li><!-- 主菜单-首页 -->
+						<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-legal"></i>
+								<span class="menu-text">预算管理</span>
+								<b class="arrow icon-angle-down"></b>
+							</a>
+							<ul class="submenu">
+								<li>
+									<a href="budget_app_add.html" target="myiframe">
+										<i class="icon-double-angle-right"></i>
+											填写预算申请表
+									</a>	
+								</li>
+								<li>
+									<a href="budget_app_admin.html" target="myiframe">
+										<i class="icon-double-angle-right"></i>
+											管理预算申请表
+									</a>
+								</li>
+							</ul><!-- 子菜单 -->
+						</li><!--主菜单-预算管理-->
+						<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-shopping-cart"></i>
+								<span class="menu-text">采购管理</span>
+								<b class="arrow icon-angle-down"></b>
+							</a>
+							<ul class="submenu">
+								<li>
+									<a href="test3.html" target="myiframe">
+										<i class="icon-double-angle-right"></i>
+										填写采购计划申购表
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="icon-double-angle-right"></i>
+										管理采购计划申购表
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="icon-double-angle-right"></i>
+										填写采购项目询价表
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="icon-double-angle-right"></i>
+										管理采购项目询价表
+									</a>
+								</li>
+
+								<li>
+									<a href="#">
+										<i class="icon-double-angle-right"></i>
+										填写购置贵重仪器论证报告
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="icon-double-angle-right"></i>
+										管理购置贵重仪器论证报告
+									</a>
+								</li>
+								
+							</ul><!--子菜单-->
+						</li><!--主菜单-计划管理-->	
+						<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-cogs"></i>
+								<span class="menu-text">个人设置</span>
+								<b class="arrow icon-angle-down"></b>
+							</a>
+							<ul class="submenu">
+								<li>
+									<a href="#">
+										<i class="icon-double-angle-right"></i>
+										修改个人资料
+									</a>
+								</li>
+								<li>
+									<a href="updatepassword.html" target="myiframe">
+										<i class="icon-double-angle-right"></i>
+										修改我的密码
+									</a>
+								</li>
+							</ul><!--子菜单-->
+						</li><!--主菜单-个人设置-->
+						<li>
+							<a href="#">
+								<i class="icon-off" aria-hidden="true"></i>
+								<span class="menu-text">退出登录</span>
+							</a>
+						</li>
+					</ul>
+					<div class="sidebar-collapse">
+						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+					</div>
+				</div><!--左侧菜单块-->
+			</div>
+			<div class="main-content">
+				<iframe src="" frameborder="0" style="width:100%;height:1080px;" scrolling="no" name="myiframe">
 			</div><!--右侧主要内容-->
 		</div><!--主界面块-->
+
+		
 	</body>
 </html>

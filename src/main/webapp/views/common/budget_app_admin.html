@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>可排序可选中的表格控件</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/font-awesome.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/bootstrap/css/bootstrap.min.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-rtl.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-skins.min.css">
+
+		<script type="text/javascript" src="../../components/jquery/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="../../components/jquery/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="../../components/jquery/jquery.dataTables.bootstrap.js"></script>
+
+		<script type="text/javascript" src="../../components/bootstrap/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="../../components/ace/js/ace-elements.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace-extra.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace.min.js"></script>
+
+	</head>
+	<body>
+		<div class="table-responsive">
+			<div class="row col-md-12">
+				<br>
+				&nbsp;&nbsp;
+				<button class="btn btn-primary btn-sm">
+					<i class="icon-trash"></i>
+					一键删除
+				</button>
+				&nbsp;&nbsp;
+				<button class="btn btn-primary btn-sm">
+					<i class="icon-refresh"></i>
+					刷新
+				</button>
+			</div>
+			<table id="sample-table" class="table table-hover table-bordered dataTable">
+				
+				<thead>
+					<tr>
+						<th class="center sorting_disabled" style="width: 53px;">
+							<label>
+								<input class="ace" type="checkbox"></input>
+								<span class="lbl"></span>
+							</label>
+						</th>
+						<th class="center sorting">项目号</th>
+						<th class="center sorting">项目名称</th>
+						<th class="center sorting">年度</th>
+						<th class="center sorting">预算总额</th>
+						<th class="center sorting_disabled">操作</th>
+					</tr>
+				</thead>
+				<tbody class="center">
+					<tr>
+						<td>
+							<label>
+								<input class="ace" type="checkbox"></input>
+								<span class="lbl"></span>
+							</label>
+						</td>
+						<td>20170711170402</td>
+						<td>科研竞赛预算</td>
+						<td>2017</td>
+						<td>10.0</td>
+						<td>
+							<button class="btn btn-sm btn-primary">修改</button>
+							<button class="btn btn-sm btn-default">删除</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>
+								<input class="ace" type="checkbox"></input>
+								<span class="lbl"></span>
+							</label>
+						</td>
+						<td>20170711172433</td>
+						<td>实验室器材购置</td>
+						<td>2018</td>
+						<td>100.0</td>
+						<td>
+							<button class="btn btn-sm btn-primary">修改</button>
+							<button class="btn btn-sm btn-default">删除</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>
+								<input class="ace" type="checkbox"></input>
+								<span class="lbl"></span>
+							</label>
+						</td>
+						<td>20170709140402</td>
+						<td>出国调研</td>
+						<td>2018</td>
+						<td>30.0</td>
+						<td>
+							<button class="btn btn-sm btn-primary">修改</button>
+							<button class="btn btn-sm btn-default">删除</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>
+								<input class="ace" type="checkbox"></input>
+								<span class="lbl"></span>
+							</label>
+						</td>
+						<td>20170911080402</td>
+						<td>学术研究工作</td>
+						<td>2017</td>
+						<td>10.0</td>
+						<td>
+							<button class="btn btn-sm btn-primary">修改</button>
+							<button class="btn btn-sm btn-default">删除</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+			jQuery(function($){
+				var oTable = $('#sample-table').dataTable( {
+					"bFilter":true,
+					"language":{
+						"url":"../../components/jquery/language/Chinese.json"
+					},
+					"bJQueryUI":true,
+					"bLengthChange":false,  //改变页面显示数据数量，不改变
+					"bPaginate":false,      //翻页功能，不翻页
+					"bInfo":false,			//页脚信息，不显示
+					"aoColumns":[			//第一个用来选中 后面的都可用来排序
+						{"bSortable":false},
+						null,null,null,null,
+						{"bSortable":false}
+					]
+				});
+
+				$('table th input:checkbox').on('click',function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

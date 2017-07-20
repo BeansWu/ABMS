@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/font-awesome.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/bootstrap/css/bootstrap.min.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-rtl.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-skins.min.css">
+
+		
+		
+	</head>
+	<body>
+		<div id="budget_app_add">
+			<div id="accordion" class="accordion-style1 panel-group">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+								基本信息
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse">
+						<div class="panel-body">
+							<form class="form-horizontal" id="application_form">
+								<div class="form-group col-md-4">
+									<label for="budget_item_number" class="col-md-4" >预算项目号</label>
+									<div class="col-md-8">
+										<input v-model="budgetApp.number" type="text" class="form-control" disabled="disabled">
+									</div>
+								</div>
+					            <div class="form-group col-md-4">
+									<label for="budget_item_name" class="col-md-4">预算项目名称</label>
+									<div class="col-md-8">
+									  <input v-model="budgetApp.name" type="text" class="form-control">
+									</div>
+						    	</div>
+								<div class="form-group col-md-4">
+									<label for="required_time" class="col-md-4">需求时间</label>
+									<div class="col-md-8">
+										<input v-model="budgetApp.requiredTime" type="text" class="form-control">
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="contact_user_number" class="col-md-4">联系人姓名</label>
+									<div class="col-md-8">
+										<input v-model="budgetApp.user" type="text" class="form-control" readonly>
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="college_name" class="col-md-4">二级单位名称</label>
+									<div class="col-md-8">
+										<input  type="text" class="form-control" readonly>
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="fill_in_date" class="col-md-4">填表日期</label>
+									<div class="col-md-8">
+										<input v-model="budgetApp.fillDate" type="text" class="form-control" readonly>
+									</div>
+								</div>
+								<div class="form-group col-md-12">
+									<label for="reason" class="col-md-2">购置理由</label>
+									<div class="col-md-8">
+										<textarea v-model="budgetApp.reason" class="form-control" rows="4"></textarea>
+									</div>
+								</div>
+							</form><!-- 上半部分的表单 -->
+						</div>
+					</div>
+				</div><!-- 面板1 -->
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+								采购项目
+							</a>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse  collapse">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<button class="btn btn-primary btn-sm" v-on:click="addPurchase" data-toggle="modal" data-target="#edit">
+									<i class="icon-plus"></i>
+									添加采购项目
+								</button>
+								<br>
+								<br>
+				                <table class="table table-vertical table-bordered table-condensed data">
+				                    <thead>
+				                    	<colgroup>
+				                    	<col style="width:10%">
+				                    	<col style="width:5%">
+				                    	<col style="width:8%">
+				                    	<col style="width:8%">
+				                    	<col>
+				                    	<col>
+				                    	<col>
+				                    	<col>
+				                    	<col style="width:15%;">
+				                        <tr>
+				                        	<th class="text-center">采购品目编码</th>
+				                        	<th class="text-center">数量</th>
+				                        	<th class="text-center">计量单位</th>
+				                        	<th class="text-center">单价</th>
+				                        	<th class="text-center">属于政府采购预算编制范围</th>
+											<th class="text-center">属于政府采购服务预算编制范围</th>
+											<th class="text-center">属于资产购置预算编制范围</th>
+											<th class="text-center">专门面向中小企业（含监狱企业）</th>
+				                            <th class="text-center">操作</th>
+				                        </tr>
+				                    </thead>
+				                    <tbody  class="text-center">
+				                    	<tr v-for="(purchase,index) of purchases">
+				                    		<td>{{ purchase.purchaseItem.code }}</td>
+				                    		<td>{{ purchase.count }}</td>
+				                    		<td>{{ purchase.unit }}</td>
+				                    		<td>{{ purchase.price }}</td>
+				                    		<td>{{ purchase.isPurchase==true?"是":"否" }}</td>
+				                    		<td>{{ purchase.isService==true?"是":"否" }}</td>
+				                    		<td>{{ purchase.isAsset==true?"是":"否" }}</td>
+				                    		<td>{{ purchase.isFaceMiddle==true?"是":"否" }}</td>
+				                    		<td>
+				                    			<button v-on:click="editPurchase(index)" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#edit">
+				                    				修改
+				                    			</button>
+				                    			<button v-on:click="deletePurchase(index)" class="btn btn-default btn-sm">
+				                    				删除
+				                    			</button>
+				                    		</td>
+				                    	</tr>
+				                    </tbody>
+				                </table>
+							</div>
+						</div>
+					</div>
+				</div><!-- 面板2 -->
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+								相关操作
+							</a>
+						</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse">
+						<div class="panel-body">
+							<button class="btn pull-right" v-on:click="save">保存</button>
+							<div class="pull-right">&nbsp;&nbsp;</div>
+							<button class="btn btn-primary pull-right">提交</button>
+						</div>
+					</div>
+				</div><!-- 面板2 -->
+			</div><!-- accordion -->
+			<div class="modal fade" role="dialog" id="edit" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title  text-danger">采购项目明细</h4>
+						</div><!-- modal-header -->
+						<div class="modal-body">							
+							<div class="row">
+								<label class="col-md-3 control-label">
+									<font color="red">*</font>采购品目编码:
+								</label>
+								<div class="col-md-8">
+									<input v-model="newPurchase.purchaseItem.code" type="text" class="form-control">
+								</div>
+							</div><!-- 采购品目编码 -->
+							<br>
+							<div class="row">
+								<label class="col-md-3 control-label">
+									<font color="red">*</font>数量:
+								</label>
+								<div class="col-md-8">
+									<input v-model="newPurchase.count" type="text" class="form-control">
+								</div>
+							</div><!-- 数量 -->
+							<br>
+							<div class="row">
+								<label class="col-md-3 control-label">
+									<font color="red">*</font>计量单位:
+								</label>
+								<div class="col-md-8">
+									<input v-model="newPurchase.unit" type="text" class="form-control">
+								</div>
+							</div><!-- 计量单位 -->
+							<br>
+							<div class="row">
+								<label class="col-md-3 control-label">
+									<font color="red">*</font>单价:
+								</label>
+								<div class="col-md-8">
+									<input v-model="newPurchase.price" type="text" class="form-control">
+								</div>
+							</div><!-- 单价 -->
+							<br>
+							<div class="row">
+								<label class="col-md-6 control-label">
+									<font color="red">*</font>是否属于政府采购预算编制范围:
+								</label>
+								<div class="col-md-6">
+									<input v-model="newPurchase.isPurchase" type="checkbox" class="ace ace-switch ace-switch-5" />
+									<span class="lbl"></span>
+								</div>
+							</div><!-- 是否属于政府采购预算编制范围 -->
+							<br>
+							<div class="row">
+								<label class="col-md-6 control-label">
+									<font color="red">*</font>是否属于政府购买服务预算编制范围:
+								</label>
+								<div class="col-md-6">
+									<input v-model="newPurchase.isService" type="checkbox" class="ace ace-switch ace-switch-5" />
+									<span class="lbl"></span>
+								</div>
+							</div><!-- 是否属于政府购买服务预算编制范围： -->
+							<br>
+							<div class="row">
+								<label class="col-md-6 control-label">
+									<font color="red">*</font>是否属于资产购置预算编制范围:
+								</label>
+								<div class="col-md-6">
+									<input v-model="newPurchase.isAsset" checked="" type="checkbox" class="ace ace-switch ace-switch-5" />
+									<span class="lbl"></span>
+								</div>
+							</div><!-- 是否属于资产购置预算编制范围： -->
+							<br>
+							<div class="row">
+								<label class="col-md-6 control-label">
+									<font color="red">*</font>是否专门面向中小企业(含监狱企业):
+								</label>
+								<div class="col-md-6">
+									<input v-model="newPurchase.isFaceMiddle" checked="" type="checkbox" class="ace ace-switch ace-switch-5" />
+									<span class="lbl"></span>
+								</div>
+							</div><!-- 是否专门面向中小企业(含监狱企业): -->
+							<br>
+							<div class="row">
+								<button class="btn btn-default btn-sm pull-right" v-on:click="closeModal">
+									返回
+								</button>
+								<div class="pull-right">&nbsp;&nbsp;</div>
+								<button v-on:click="modifyPurchase" type="close" class="btn btn-primary btn-sm pull-right">
+									保存
+								</button>
+							</div>
+							<br>
+						</div><!-- modal-body -->
+					</div><!-- modal-content -->
+				</div><!-- modal-dialog -->
+			</div><!-- 模态框 -->	
+		</div><!-- budget_app_add -->
+		<script type="text/javascript" src="../../components/jquery/jquery-1.11.2.min.js"></script>
+
+		<script type="text/javascript" src="../../components/bootstrap/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="../../components/ace/js/ace-elements.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace-extra.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace.min.js"></script>
+		
+		<script type="text/javascript" src="../../components/vue/vue.js"></script>
+		<script type="text/javascript" src="../../js/common/budget_app_add.js"></script>
+	</body>	
+</html>
