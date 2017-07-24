@@ -47,5 +47,12 @@ public class PurchaseDaoImpl extends BaseDao implements PurchaseDao{
 	public List<Purchase> findAll(Integer budgetId) {	
 		return super.query("from Purchase p where p.budgetApp = ?", budgetAppService.get(budgetId));
 	}
+
+	@Override
+	@Transactional
+	public List<Purchase> findAll() {
+		
+		return super.query("from Purchase");
+	}
 	
 }

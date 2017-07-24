@@ -15,16 +15,19 @@
 
 	</head>
 	<body>
-		<div id="budget_app_admin" class="table-responsive">
+		<div id="budget_audit" class="table-responsive">
 			<div class="row col-md-12">
 				<br>
 				&nbsp;&nbsp;
-				<button class="btn btn-primary btn-sm">
-					<i class="icon-trash"></i>
-					一键删除
+				<button class="btn btn-primary btn-sm" v-on:click="allow">
+					一键通过
 				</button>
 				&nbsp;&nbsp;
-				<button class="btn btn-primary btn-sm">
+				<button class="btn btn-primary btn-sm" v-on:click="reject">
+					一键驳回
+				</button>
+				&nbsp;&nbsp;
+				<button class="btn btn-primary btn-sm" v-on:click="refresh">
 					<i class="icon-refresh"></i>
 					刷新
 				</button>
@@ -39,29 +42,30 @@
 								<span class="lbl"></span>
 							</label>
 						</th>
-						<th class="center sorting">项目号</th>
-						<th class="center sorting">项目名称</th>
-						<th class="center sorting">年度</th>
-						<th class="center sorting">审核状态</th>
-						<th class="center sorting_disabled">操作</th>
+						<th class="center sorting">预算项目</th>
+						<th class="center sorting">采购品目</th>
+						<th class="center sorting">单位</th>
+						<th class="center sorting">数量</th>
+						<th class="center sorting">单价/万</th>
+						<th class="center sorting">总价/万</th>
+						<th class="center sorting">进度</th>
 					</tr>
 				</thead>
 				<tbody class="center">
-					<tr v-for="(budgetApp,index) of budgetApps">
+					 <tr v-for="(purchase,index) in purchases">
 						<td>
 							<label>
 								<input class="ace" type="checkbox"></input>
 								<span class="lbl"></span>
 							</label>
 						</td>
-						<td>{{ budgetApp.number }}</td>
-						<td>{{ budgetApp.name }}</td>
-						<td>{{ budgetApp.requiredTime }}</td>
-						<td>{{ budgetApp.auditState}}</td>
-						<td>
-							<button class="btn btn-sm btn-primary" v-on:click="modify(index)">修改</button>
-							<button class="btn btn-sm btn-default" v-on:click="del">删除</button>
-						</td>
+						<td>{{ purchase.budgetApp.name }}</td>
+						<td>{{ purchase.purchaseItem.name }}</td>
+						<td>{{ purchase.unit }}</td>
+						<td>{{ purchase.count }}</td>
+						<td>{{ purchase.price }}</td>
+						<td>{{ purchase.price }}</td>
+						<td>{{ purchase.auditState }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -76,35 +80,9 @@
 		<script type="text/javascript" src="../../components/ace/js/ace-extra.min.js"></script>
 		<script type="text/javascript" src="../../components/ace/js/ace.min.js"></script>
 		
-		<script type="text/javascript">
-			jQuery(function($){
-				var oTable = $('#sample-table').dataTable( {
-					"bFilter":true,
-					"language":{
-						"url":"../../components/jquery/language/Chinese.json"
-					},
-					"bJQueryUI":true,
-					"bLengthChange":false,  //改变页面显示数据数量，不改变
-					"bPaginate":false,      //翻页功能，不翻页
-					"bInfo":false,			//页脚信息，不显示
-					"aoColumns":[			//第一个用来选中 后面的都可用来排序
-						{"bSortable":false},
-						null,null,null,null,
-						{"bSortable":false}
-					]
-				});
 
-				$('table th input:checkbox').on('click',function(){
-					var that = this;
-					$(this).closest('table').find('tr > td:first-child input:checkbox')
-					.each(function(){
-						this.checked = that.checked;
-						$(this).closest('tr').toggleClass('selected');
-					})
-				})
-			})
-		</script>
 		<script type="text/javascript" src="../../components/vue/vue.js"></script>
-		<script type="text/javascript" src="../../js/common/budget_app_admin.js"></script>
+		<script type="text/javascript" src="../../js/leader/budget_audit.js"></script>
+
 	</body>
 </html>

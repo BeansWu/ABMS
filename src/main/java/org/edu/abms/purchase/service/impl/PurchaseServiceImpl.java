@@ -41,5 +41,11 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public List<Purchase> findAll(Integer budgetId) {
 		return purchaseDao.findAll(budgetId);
 	}
+
+	@Override
+	@Transactional
+	public List<Purchase> findAll() {
+		return purchaseDao.findAll();
+	}
 	
 }

@@ -38,5 +38,11 @@ public interface PurchaseDao {
 	 */
 	List<Purchase> findAll(Integer budgetId);
 	
+	/**
+	 * 查找所有采购项目
+	 * @return 操作结果
+	 */
+	List<Purchase> findAll();
+	
 	
 }

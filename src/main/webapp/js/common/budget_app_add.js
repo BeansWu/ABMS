@@ -76,7 +76,8 @@ var budget_app_add = new Vue({
 			isPurchase:true,
 			isService:false,
 			isAsset:false,
-			isFaceMiddle:false
+			isFaceMiddle:false,
+			auditState:1
 			
 		},
 		purchases:[]
@@ -188,5 +189,11 @@ var budget_app_add = new Vue({
 
 budget_app_add.initBudgetApp();
 
+function getSession(){
+	var budgetApp = '<%=Session["budgetApp"]%>';
+	alert(budgetApp.number);
+	alert('fff');
+}
+getSession();
 
 

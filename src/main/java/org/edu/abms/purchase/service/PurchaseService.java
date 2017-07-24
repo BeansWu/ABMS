@@ -33,4 +33,10 @@ public interface PurchaseService {
 	 */
 	List<Purchase> findAll(Integer budgetId);
 	
+	/**
+	 * 查找所有采购项目明细
+	 * @return 操作结果
+	 */
+	List<Purchase> findAll();
+	
 }

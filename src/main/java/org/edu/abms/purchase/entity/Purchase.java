@@ -89,7 +89,11 @@ public class Purchase implements Serializable{
 	@Column(name = "is_face_middle", nullable = false)
 	private Boolean isFaceMiddle;
 
-	
+	/**
+	 * 审核状态
+	 */
+	private AuditState auditState;
+
 
 	public Integer getId() {
 		return id;
@@ -169,6 +173,14 @@ public class Purchase implements Serializable{
 
 	public void setIsFaceMiddle(Boolean isFaceMiddle) {
 		this.isFaceMiddle = isFaceMiddle;
+	}
+	
+	public AuditState getAuditState() {
+		return auditState;
+	}
+
+	public void setAuditState(AuditState auditState) {
+		this.auditState = auditState;
 	}
 
 	public Purchase() {
