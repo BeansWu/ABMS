@@ -41,8 +41,8 @@ public class PurchaseItemDaoImpl extends BaseDao implements PurchaseItemDao{
 	@Transactional
 	public PurchaseItem findByCode(String code) {
 		String hql = "from PurchaseItem as pi where pi.code = ?";
-		PurchaseItem purchaseJoural = queryForBean(hql,code);
-		return purchaseJoural;
+		PurchaseItem purchaseItem = queryForBean(hql, code);
+		return purchaseItem;
 	}
 
 	@Override
@@ -51,6 +51,14 @@ public class PurchaseItemDaoImpl extends BaseDao implements PurchaseItemDao{
 		String hql = "from PurchaseItem";
 		List<PurchaseItem> list = super.query(hql);
 		return list;
+	}
+
+	@Override
+	@Transactional
+	public PurchaseItem findById(Integer id) {
+		String hql = "from PurchaseItem as pi where pi.id = ?";
+		PurchaseItem purchaseItem = queryForBean(hql, id);
+		return purchaseItem;
 	}
 
 

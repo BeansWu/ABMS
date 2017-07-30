@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/font-awesome.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/bootstrap/css/bootstrap.min.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-rtl.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-skins.min.css">
+		<style type="text/css">
+			.el-dialog--large{
+				width:480px;
+			}
+			.footer{
+				float:right;
+				margin-bottom:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="table-responsive">
+				<div class="row col-md-12">
+					<br>
+					&nbsp;&nbsp;
+					<button class="btn btn-primary btn-sm" @click="allow">
+						一键通过
+					</button>
+					&nbsp;&nbsp;
+					<button class="btn btn-primary btn-sm" @click="reject">
+						一键驳回
+					</button>
+					&nbsp;&nbsp;
+					<button class="btn btn-primary btn-sm" @click="refresh">
+						<i class="icon-refresh"></i>
+						刷新
+					</button>
+				</div>
+				<table id="sample-table" class="table table-striped table-bordered  dataTable">
+					<thead>
+						<tr>
+							<th class="center" style="width: 53px;">
+								<label>
+									<input class="ace" type="checkbox"></input>
+									<span class="lbl"></span>
+								</label>
+							</th>
+							<th class="center sorting">二级单位</th>
+							<th class="center sorting">联系人</th>
+							<th class="center sorting">联系方式</th>
+							<th class="center sorting">单位</th>
+							<th class="center sorting">单价</th>
+							<th class="center sorting">数量</th>
+							<th class="center sorting">进度</th>
+							<th class="hidden">ID</th>
+						</tr>
+					</thead>
+					<tbody class="center">
+						<tr v-for = "(subscribe,index) of subscribes">
+							<td>
+								<label>
+									<input class="ace" type="checkbox"></input>
+									<span class="lbl"></span>
+								</label>
+							</td>
+							<td>{{ subscribe.user.faculty.name}}</td>
+							<td>{{ subscribe.user.name }}</td>
+							<td></td>
+							<td>{{ subscribe.unit }}</td>
+							<td>{{ subscribe.price }}</td>
+							<td>{{ subscribe.count }}</td>
+							<td>{{ subscribe.auditState }}</td>
+							<td class="hidden">{{ subscribe.id }}</td>
+						</tr>				
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/javascript" src="../../components/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="../../components/jquery/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../../components/jquery/jquery.dataTables.bootstrap.js"></script>
+
+	<script type="text/javascript" src="../../components/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="../../components/ace/js/ace-elements.min.js"></script>
+	<script type="text/javascript" src="../../components/ace/js/ace-extra.min.js"></script>
+	<script type="text/javascript" src="../../components/ace/js/ace.min.js"></script>
+	<script type="text/javascript" src="../../js/application/subscribe_add.js"></script>
+	
+	<script type="text/javascript" src="../../components/vue/vue.js"></script>
+	<script type="text/javascript" src="../../js/manager/subscribe_audit.js"></script>
+	
+</html>

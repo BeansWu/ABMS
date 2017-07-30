@@ -32,11 +32,18 @@ public interface PurchaseItemDao {
 	 */
 	PurchaseItem findByCode(String code);
 	
+	/**
+	 * 根据ID查找
+	 * @param id
+	 * @return
+	 */
+	PurchaseItem findById(Integer id);
+	
 	/** 
 	 *  查找所有品目信息
 	 * @return: 操作结果
 	 */
-	List<PurchaseItem> findAll();
+	List<PurchaseItem> findAll();	
 
 	/**
 	 * 资产管理部门修改全校同品目编码下自行采购项目的预算限制

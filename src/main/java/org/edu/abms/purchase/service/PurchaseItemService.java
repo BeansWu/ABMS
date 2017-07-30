@@ -10,6 +10,13 @@ import org.edu.abms.purchase.entity.PurchaseItem;
  * @date:   2017年7月11日 下午3:53:35
  */
 public interface PurchaseItemService {
+	
+	/**
+	 * 根据ID查找采购品目
+	 * @param id
+	 * @return 操作结果
+	 */
+	PurchaseItem findById(Integer id);
 
 	/** 
 	 * 添加或修改采购品目
@@ -20,10 +27,9 @@ public interface PurchaseItemService {
 	
 	/** 
 	 *  查找当前品目的所有子品目
-	 * @param:  fatherId   
 	 * @return: 子品目集合     
 	 */
-	List<PurchaseItem> findAll(Integer fatherId);
+	List<PurchaseItem> findAll();
 
 	/**
 	 * 资产管理部门修改全校同品目编码下自行采购品目的总预算金额

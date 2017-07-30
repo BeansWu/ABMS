@@ -34,13 +34,13 @@ public interface PurchaseDao {
 	
 	/** 
 	 *  查找所有采购项目(根据项目号)
-	 * @return: 操作结果     
+	 * @return: 采购项目集合   
 	 */
 	List<Purchase> findAll(Integer budgetId);
 	
 	/**
 	 * 查找所有采购项目
-	 * @return 操作结果
+	 * @return 采购项目集合 
 	 */
 	List<Purchase> findAll();
 	

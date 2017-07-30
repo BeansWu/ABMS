@@ -10,7 +10,8 @@ jQuery(function($){
 		"bInfo":false,			//页脚信息，不显示
 		"aoColumns":[			//第一个用来选中 后面的都可用来排序
 			{"bSortable":false},
-			null,null,null,null,null,null,null
+			null,null,null,null,null,null,null,
+			{"bSortable":false}
 		]
 	});
 	
@@ -79,10 +80,19 @@ var budget_audit = new Vue({
 			$("#sample-table").find('tr > td:first-child input:checkbox')
 			.each(function(){
 				if(this.checked == true){
-					var index = $(this).closest('tr').index();
-					that.modifyPurchases.push(that.purchases[index]);
+					var id = $(this).closest('tr').find('td:last-child').html();
+					that.modifyPurchases.push(that.findById(id));
 				}					
 			});
+		},
+		
+		findById:function(id){
+			var data;
+			this.purchases.forEach(function(purchase,index,purchases){
+				if(purchase.id == id)
+					data = purchase;
+			});
+			return data;
 		},
 		
 		allow:function(){		

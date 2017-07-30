@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>zTree测试</title>
+		<link rel="stylesheet" type="text/css" href="../../components/jquery/zTree/css/zTreeStyle/zTreeStyle.css">
+		<link rel="stylesheet" type="text/css" href="../../components/jquery/zTree/css/demo.css">
+		
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/font-awesome.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/bootstrap/css/bootstrap.min.css">
+
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-rtl.min.css">
+		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-skins.min.css">
+	
+	</head>
+	<body>
+		<div id="purchaseItem">
+			<p>
+				<span class="input-icon input-icon-right">
+					<input type="text" readonly="" v-model="code">
+					<i class="icon-search  is-clickable" v-on:click="test"></i>
+				</span>
+				<!-- <input id="keyword" type="text" name="请输入">
+				<button id="search-bt" v-on:click="filter">搜索</button>
+				<button  v-on:click="getChecked">结果</button> -->
+			</p>
+			<div class="modal fade"  id="select" tabindex="-1">
+				<div class="modal-dialog" style="width:450px;">
+					<div class="modal-content">
+						<div class="modal-body">							
+							<h2 class="center">政府采购品目分类目录</h2>
+							<br>
+							<div class="search">
+								<div class="input-group">
+									<input type="text" name="" class="form-control" v-modal="keyword">
+									<div class="input-group-addon">
+										<i class="icon-search" v-on:click="filter"></i>
+									</div>
+									<div class="input-group-addon">
+										<i class="icon-chevron-right" v-on:click=""></i>
+									</div>
+									<div class="input-group-addon">
+										<i class="icon-chevron-down" v-on:click=""></i>
+									</div>
+								</div>
+							</div>
+							<div class="item-tree">
+								<div class="_page">
+									<ul id="treeDemo" class="ztree"></ul>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<button class="btn btn-default btn-sm pull-right" v-on:click="closeModal">
+									返回
+								</button>
+								<div class="pull-right">&nbsp;&nbsp;</div>
+								<button v-on:click="getChecked" type="close" class="btn btn-primary btn-sm pull-right">
+									保存
+								</button>
+							</div>
+							<br>
+						</div><!-- modal-body -->
+					</div><!-- modal-content -->
+				</div><!-- modal-dialog -->
+			</div><!-- 模态框 -->	
+		</div>
+		<!-- jquery包 ztree依赖jquery -->
+		<script type="text/javascript" src="../../components/jquery/jquery-1.11.2.min.js"></script>
+		<!-- ztree核心包，ztree核心功能 -->
+		<script type="text/javascript" src="../../components/jquery/zTree/js/jquery.ztree.core.js"></script>
+		<!-- ztree excheck包，ztree节点勾选功能 -->
+		<script type="text/javascript" src="../../components/jquery/zTree/js/jquery.ztree.excheck.js"></script>
+		<!-- ztree exhide包, ztree隐藏显示节点功能 -->
+		<script type="text/javascript" src="../../components/jquery/zTree/js/jquery.ztree.exhide.js"></script>
+		<script type="text/javascript" src="../../components/vue/vue.js"></script>
+		<script type="text/javascript">
+		
+			function zTreeBeforeClick(treeId, treeNode, clickFlag) {
+				return !treeNode.isParent;
+			};
+			
+
+			function findAll(){						
+				$.get("../../purchaseItem/findAll", function(data){
+
+					var purchaseItems = data;
+					var zNodes = [];
+					purchaseItems.forEach(function(item, index, list){
+						var purchaseItem = {
+							id:item.id,
+							pId:item.parentItem==null?0:item.parentItem.id,
+							name:item.code+' '+item.name
+						};
+						zNodes.push(purchaseItem);
+					});
+					purchase_item.init(zNodes);
+				});
+		
+			};
+			findAll();
+
+			
+			var purchase_item = new Vue({
+				el:'#purchaseItem',
+				data:{
+					code : {},
+					keyword : {},
+					zNodes : [],		 //所有节点
+					hiddenNodes : [],	 //用于存储被隐藏的结点
+			 		zTreeObj : { },
+			 		setting : {
+						view: {
+							showIcon: false		//不显示图标
+						},
+						check:{
+							enable:true,
+							chkStyle: "radio",
+							radioType: "all"	//分组范围为全局 即只能选一个
+						},
+						data: {
+							simpleData: {
+								enable: true
+							}
+						},
+						callback:{
+							beforeCheck:zTreeBeforeClick
+						}
+					}
+				},
+				methods:{
+				
+					init: function(data){
+						this.zNodes = data;
+						this.zTreeObj = $.fn.zTree.init($("#treeDemo"), this.setting, this.zNodes);
+					},
+					
+					filter: function(){
+						//展开所有
+						this.zTreeObj.expandAll(true);
+		
+						// 显示上次搜索后被隐藏的结点
+						this.zTreeObj.showNodes(this.hiddenNodes);
+		
+						//查找不符合条件的叶子结点
+						function filterFunction(node){
+							if(node.isParent||node.name.indexOf(this.keyword)!=-1)
+								return false;
+							return true;
+						};
+		
+						// 获取不符合条件的叶子结点
+						this.hiddenNodes = zTreeObj.getNodesByFilter(filterFunction);
+		
+						//隐藏不符合条件的叶子结点
+						this.zTreeObj.hideNodes(this.hiddenNodes);
+					},
+					
+					//只能选中叶子节点
+					zTreeBeforeClick: function(treeId, treeNode, clickFlag) {
+						return !treeNode.isParent;
+					},
+					
+					test: function() {
+						alert('fuck');
+						$('#select').modal();
+					},
+					
+					getChecked:function(){
+						this.code = this.zTreeObj.getCheckedNodes()[0].name;
+						alert(this.zTreeObj.getCheckedNodes()[0].name);
+					}
+					
+				}
+				
+				
+			});
+
+			
+
+		</script>
+		<script type="text/javascript" src="../../components/bootstrap/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="../../components/ace/js/ace-elements.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace-extra.min.js"></script>
+		<script type="text/javascript" src="../../components/ace/js/ace.min.js"></script>
+	</body>
+</html>

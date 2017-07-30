@@ -1,10 +1,20 @@
 package org.edu.abms.budget.entity;
 
-import org.edu.abms.user.entity.User;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.edu.abms.common.entity.AuditState;
+import org.edu.abms.user.entity.User;
 
 /**
  * @Description: 预算申请信息

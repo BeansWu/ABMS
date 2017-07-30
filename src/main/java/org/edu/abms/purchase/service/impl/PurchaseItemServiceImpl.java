@@ -38,8 +38,15 @@ public class PurchaseItemServiceImpl implements PurchaseItemService{
 
 
 	@Override
-	public List<PurchaseItem> findAll(Integer fatherId) {
+	public List<PurchaseItem> findAll() {
 		return purchaseItemDao.findAll();
+	}
+
+	@Override
+	@Transactional
+	public PurchaseItem findById(Integer id) {
+
+		return purchaseItemDao.findById(id);
 	}
 	
 }

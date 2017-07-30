@@ -38,7 +38,31 @@ function saveOrUpdate(budgetApp) {
 			}
 		}
 	})
-}
+};
+
+//只能勾选叶子节点
+function zTreeBeforeClick(treeId, treeNode, clickFlag) {
+	return !treeNode.isParent;
+};
+
+function findAll(){						
+	$.get("../../purchaseItem/findAll", function(data){
+
+		var purchaseItems = data;
+		var zNodes = [];
+		purchaseItems.forEach(function(item, index, list){
+			var purchaseItem = {
+				id:item.id,
+				pId:item.parentItem==null?0:item.parentItem.id,
+				name:item.code+' '+item.name
+			};
+			zNodes.push(purchaseItem);
+		});
+		budget_app_add.initTree(zNodes);
+	});
+
+};
+findAll();
 
 
 /* 预算项目 */
@@ -80,7 +104,31 @@ var budget_app_add = new Vue({
 			auditState:1
 			
 		},
-		purchases:[]
+		purchases:[],
+		//以下是品目树相关参数
+		keyword:{},
+		zNodes:[],
+		hiddenNodes:[],
+		zTreeObj:{},
+		setting : {
+			view: {
+				showIcon: false		//不显示图标
+			},
+			check:{
+				enable:true,
+				chkStyle: "radio",
+				radioType: "all"	//分组范围为全局 即只能选一个
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback:{
+				beforeCheck:zTreeBeforeClick
+			}
+		}
+
 	},
 	methods : {
 		initBudgetApp : function () {	//初始化预算项目（某些自动生成）
@@ -120,11 +168,11 @@ var budget_app_add = new Vue({
 				
 			}
 			
-			this.closeModal();
+			this.closeModal1();
 			this.selected=-1;
 		},
 		
-		closeModal:function(){		//关闭模态框
+		closeModal1:function(){		//关闭模态框
 			$("#edit").modal("hide");
 		},
 		
@@ -140,9 +188,7 @@ var budget_app_add = new Vue({
 					reason:''
 				},
 				purchaseItem:{		//应有一个获取purchaseItem的方法
-					id:1,
-					code:'新采集',
-					name:'货物'
+				
 				},
 				count:0,
 				unit:'新采集',
@@ -180,6 +226,61 @@ var budget_app_add = new Vue({
 					}
 				}
 			})
+		},
+		
+		/* 以下是品目树相关方法 */
+		
+		initTree:function(data){
+			this.zNodes = data;
+			this.zTreeObj = $.fn.zTree.init($("#itemTree"), this.setting, this.zNodes);
+		},
+		
+		filter:function(){
+			//展开所有
+			this.unfold();
+
+			// 显示上次搜索后被隐藏的结点
+			this.zTreeObj.showNodes(this.hiddenNodes);
+
+			//查找不符合条件的叶子结点
+			function filterFunction(node){
+				if(node.isParent||node.name.indexOf(this.keyword)!=-1)
+					return false;
+				return true;
+			};
+
+			// 获取不符合条件的叶子结点
+			this.hiddenNodes = zTreeObj.getNodesByFilter(filterFunction);
+
+			//隐藏不符合条件的叶子结点
+			this.zTreeObj.hideNodes(this.hiddenNodes);
+		},
+		
+		showTree: function() {
+			$('#tree').modal();
+		},
+		
+		getChecked:function(){
+			
+			var id = this.zTreeObj.getCheckedNodes()[0].id;
+			$.get("../../purchaseItem/findById", {id:id}, function(data){
+
+				budget_app_add.newPurchase.purchaseItem = data;
+			});
+
+			$('#tree').modal("hide");
+		},
+		
+		closeModal2:function(){
+			$('#tree').modal("hide");
+		},
+		
+		foldUp:function(){
+			this.zTreeObj.expandAll(false);
+		},
+		
+		unfold:function(){
+			this.zTreeObj.expandAll(true);
 		}
 		
 	}	
@@ -189,11 +290,6 @@ var budget_app_add = new Vue({
 
 budget_app_add.initBudgetApp();
 
-function getSession(){
-	var budgetApp = '<%=Session["budgetApp"]%>';
-	alert(budgetApp.number);
-	alert('fff');
-}
-getSession();
+
 
 

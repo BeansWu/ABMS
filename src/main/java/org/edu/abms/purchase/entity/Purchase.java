@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.edu.abms.budget.entity.BudgetApp;
+import org.edu.abms.common.entity.AuditState;
 import org.springframework.stereotype.Component;
 
 /** @Description:TODO 采购项目明细  

@@ -1,4 +1,4 @@
-package org.edu.abms.purchase.entity;
+package org.edu.abms.common.entity;
 
 /**
  * @Description: 审核状态
