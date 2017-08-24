@@ -46,4 +46,10 @@ public class BudgetAppServiceImpl implements BudgetAppService{
 	public BudgetApp get(Integer budgetAppId) {
 		return budgetAppDao.get(budgetAppId);
 	}
+
+    @Transactional
+	@Override
+	public BudgetApp findByNum(String number) {
+		return budgetAppDao.findByNum(number);
+	}
 }

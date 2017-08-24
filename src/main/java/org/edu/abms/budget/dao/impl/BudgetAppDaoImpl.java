@@ -39,4 +39,9 @@ public class BudgetAppDaoImpl extends BaseDao implements BudgetAppDao{
 		return super.queryForBean("from BudgetApp ba where ba.id = ?", budgetAppId);
 
 	}
+
+	@Override
+	public BudgetApp findByNum(String number) {
+		return super.queryForBean("from BudgetApp ba where ba.number = ?", number);
+	}
 }

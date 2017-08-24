@@ -10,57 +10,31 @@
 		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace.min.css">
 		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-rtl.min.css">
 		<link rel="stylesheet" type="text/css" href="../../components/ace/css/ace-skins.min.css">
-
-		
-
 	</head>
 	<body>
 		<div id="budget_app_admin" class="table-responsive">
-			<div class="row col-md-12">
-				<br>
-				&nbsp;&nbsp;
-				<button class="btn btn-primary btn-sm">
-					<i class="icon-trash"></i>
-					一键删除
-				</button>
-				&nbsp;&nbsp;
-				<button class="btn btn-primary btn-sm">
-					<i class="icon-refresh"></i>
-					刷新
-				</button>
-			</div>
+
 			<table id="sample-table" class="table table-hover table-bordered dataTable">
 				
 				<thead>
 					<tr>
-						<th class="center" style="width: 53px;">
-							<label>
-								<input class="ace" type="checkbox"></input>
-								<span class="lbl"></span>
-							</label>
-						</th>
 						<th class="center sorting">项目号</th>
 						<th class="center sorting">项目名称</th>
+						<th class="center sorting">所在单位</th>
 						<th class="center sorting">年度</th>
-						<th class="center sorting">审核状态</th>
+						<th class="center sorting">联系人</th>
 						<th class="center sorting_disabled">操作</th>
 					</tr>
 				</thead>
 				<tbody class="center">
 					<tr v-for="(budgetApp,index) of budgetApps">
-						<td>
-							<label>
-								<input class="ace" type="checkbox"></input>
-								<span class="lbl"></span>
-							</label>
-						</td>
 						<td>{{ budgetApp.number }}</td>
 						<td>{{ budgetApp.name }}</td>
+						<td>{{ budgetApp.user.faculty.name }}</td>
 						<td>{{ budgetApp.requiredTime }}</td>
-						<td>{{ budgetApp.auditState}}</td>
+						<td>{{ budgetApp.user.name }}</td>
 						<td>
-							<button class="btn btn-sm btn-primary" v-on:click="modify(index)">修改</button>
-							<button class="btn btn-sm btn-default" v-on:click="del">删除</button>
+							<button class="btn btn-sm btn-primary" v-on:click="modify(budgetApp.id)">查看</button>
 						</td>
 					</tr>
 				</tbody>
@@ -88,8 +62,7 @@
 					"bPaginate":false,      //翻页功能，不翻页
 					"bInfo":false,			//页脚信息，不显示
 					"aoColumns":[			//第一个用来选中 后面的都可用来排序
-						{"bSortable":false},
-						null,null,null,null,
+						null,null,null,null,null,
 						{"bSortable":false}
 					]
 				});
@@ -104,6 +77,7 @@
 				})
 			})
 		</script>
+		<script type="text/javascript" src="../../components/jquery/jquerysession.js"></script>
 		<script type="text/javascript" src="../../components/vue/vue.js"></script>
 		<script type="text/javascript" src="../../js/common/budget_app_admin.js"></script>
 	</body>

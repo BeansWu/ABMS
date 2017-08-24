@@ -6,6 +6,7 @@ import org.edu.abms.budget.service.BudgetAppService;
 import org.edu.abms.common.dao.BaseDao;
 import org.edu.abms.purchase.dao.PurchaseDao;
 import org.edu.abms.purchase.entity.Purchase;
+import org.edu.abms.purchase.entity.PurchaseItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -35,8 +36,8 @@ public class PurchaseDaoImpl extends BaseDao implements PurchaseDao{
 
 	@Override
 	@Transactional
-	public boolean del(Integer purchaseId) {
-		return super.del("delete from Purchase p where p.id = ?", purchaseId);
+	public boolean del(Integer id) {
+		return super.del("delete from Purchase p where p.id = ?", id);
 	}
 
 	@Autowired

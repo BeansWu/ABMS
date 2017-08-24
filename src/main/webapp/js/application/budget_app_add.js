@@ -21,24 +21,7 @@ function getUser() {
 	return user;
 }
 
-/* 添加或保存预算项目  */
-function saveOrUpdate(budgetApp) {
 
-	$.ajax({
-		type: "POST",
-		url: "../../budget/saveOrUpdate",
-		dataType: "json",
-		contentType: "application/json",
-		data: JSON.stringify(budgetApp),
-		success: function(data) {
-			switch(data["result"]) {
-				case"success":alert("提交成功");break;
-				case"failure":alert("提交失败");break;
-				default:alert("未知错误");
-			}
-		}
-	})
-};
 
 //只能勾选叶子节点
 function zTreeBeforeClick(treeId, treeNode, clickFlag) {
@@ -80,15 +63,7 @@ var budget_app_add = new Vue({
 		},
 		selected:-1,
 		newPurchase:{
-			budgetApp:{
-				id:1,
-				fillDate:new Date('2017-01-01 00:00:00'),
-				name:'研究生活经费',
-				number:'45217790',
-				requiredTime:'2018',
-				auditState:0,
-				reason:''
-			},
+			budgetApp:{},
 			purchaseItem:{
 				id:1,
 				code:'新采集',
@@ -101,8 +76,7 @@ var budget_app_add = new Vue({
 			isService:false,
 			isAsset:false,
 			isFaceMiddle:false,
-			auditState:1
-			
+			auditState:'SUBMITTED'
 		},
 		purchases:[],
 		//以下是品目树相关参数
@@ -141,17 +115,36 @@ var budget_app_add = new Vue({
 			this.budgetApp.reason = "";
 		},
 		save : function() { 			//保存预算项目及其采购明细
-			alert('保存');
-			saveOrUpdate({
+			this.saveBudgetApp();
+			this.saveAllPurchase();
+		},
+		
+		/* 添加或保存预算项目  */
+		saveBudgetApp: function() {
+			var that = this;
+			var budget = {
 				user:getUser(),
 				number:this.budgetApp.number,
 				name:this.budgetApp.name,
 				requiredTime:this.budgetApp.requireTime,
 				fillDate:new Date(this.budgetApp.fillDate),
-				reason:this.budgetApp.reason,
-				auditState:0
+				reason:this.budgetApp.reason
+			};
+			$.ajax({
+				type: "POST",
+				url: "../../budget/saveOrUpdate",
+				dataType: "json",
+				contentType: "application/json",
+				async:false,
+				data: JSON.stringify(budget),
+				success: function(data) {
+					alert(data.id);
+					that.purchases.forEach(function(purchase, index, purchases){
+						purchase.budgetApp = data;
+						alert(purchase.budgetApp.id);
+					});
+				}
 			});
-			this.saveAllPurchase();
 		},
 		
 		initPurchase:function (data) {	//初始化采购明细  用在修改预算项目的时候
@@ -179,24 +172,21 @@ var budget_app_add = new Vue({
 		addPurchase:function () {	
 			this.newPurchase = {	
 				budgetApp:{			//应有一个获取budgetApp的方法
-					id:1,
-					fillDate:new Date('2017-01-01 00:00:00'),
-					name:'研究生活经费',
-					number:'45217790',
-					requiredTime:'2018',
-					auditState:0,
-					reason:''
+					
 				},
 				purchaseItem:{		//应有一个获取purchaseItem的方法
-				
+					id:1,
+					code:'新采集',
+					name:'货物'
 				},
 				count:0,
 				unit:'新采集',
 				price:0,
-				isPurchase:true,
+				isPurchase:false,
 				isService:false,
 				isAsset:false,
-				isFaceMiddle:false			
+				isFaceMiddle:false,
+				auditState:'SUBMITTED'
 			}
 		},
 		
@@ -211,12 +201,13 @@ var budget_app_add = new Vue({
 		},
 		
 		saveAllPurchase:function () {			//保存所有采购项目明细
-			alert("您点击了保存采购明细");
+			alert(this.purchases[0].budgetApp.id);
 			$.ajax({
 				type: "POST",
 				url: "../../purchase/saveAll",
 				dataType: "json",
 				contentType: "application/json",
+				async:false,
 				data: JSON.stringify(this.purchases),
 				success: function(data) {
 					switch(data["result"]) {

@@ -18,7 +18,7 @@
 		
 	</head>
 	<body>
-		<div id="budget_app_add">
+		<div id="budget_app_mod">
 			<div id="accordion" class="accordion-style1 panel-group">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -34,31 +34,31 @@
 								<div class="form-group col-md-4">
 									<label for="budget_item_number" class="col-md-4" >预算编号</label>
 									<div class="col-md-8">
-										<input v-model="budgetApp.number" type="text" class="form-control" disabled="disabled">
+										<input v-model="budgetApp.number" type="text" class="form-control" readonly>
 									</div>
 								</div>
 					            <div class="form-group col-md-4">
 									<label for="budget_item_name" class="col-md-4">预算名称</label>
 									<div class="col-md-8">
-									  <input v-model="budgetApp.name" type="text" class="form-control">
+									  <input v-model="budgetApp.name" type="text" class="form-control" readonly>
 									</div>
 						    	</div>
 								<div class="form-group col-md-4">
 									<label for="required_time" class="col-md-4">预算年度</label>
 									<div class="col-md-8">
-										<input v-model="budgetApp.requiredTime" type="text" class="form-control">
+										<input v-model="budgetApp.requiredTime" type="text" class="form-control" readonly>
 									</div>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="contact_user_number" class="col-md-4">预算人员</label>
 									<div class="col-md-8">
-										<input v-model="budgetApp.user" type="text" class="form-control" readonly>
+										<input v-model="budgetApp.user.name" type="text" class="form-control" readonly>
 									</div>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="college_name" class="col-md-4">所属单位</label>
 									<div class="col-md-8">
-										<input  type="text" class="form-control" readonly>
+										<input v-model="budgetApp.user.faculty.name" type="text" class="form-control" readonly>
 									</div>
 								</div>
 								<div class="form-group col-md-4">
@@ -70,7 +70,7 @@
 								<div class="form-group col-md-12">
 									<label for="reason" class="col-md-2">预算简介</label>
 									<div class="col-md-8">
-										<textarea v-model="budgetApp.reason" class="form-control" rows="4"></textarea>
+										<textarea v-model="budgetApp.reason" class="form-control" rows="4" readonly></textarea>
 									</div>
 								</div>
 							</form><!-- 上半部分的表单 -->
@@ -94,17 +94,18 @@
 								</button>
 								<br>
 								<br>
-				                <table class="table table-vertical table-bordered table-condensed data">
+				                <table id="tb_purchase" class="table table-vertical table-bordered table-condensed data">
 				                    <thead>
 				                    	<colgroup>
 				                    	<col style="width:10%">
 				                    	<col style="width:5%">
 				                    	<col style="width:8%">
-				                    	<col style="width:8%">
+				                    	<col style="width:6%">
 				                    	<col>
 				                    	<col>
 				                    	<col>
 				                    	<col>
+				                    	<col style="width:10%;">
 				                    	<col style="width:15%;">
 				                        <tr>
 				                        	<th class="text-center">采购品目编码</th>
@@ -115,6 +116,7 @@
 											<th class="text-center">属于政府采购服务预算编制范围</th>
 											<th class="text-center">属于资产购置预算编制范围</th>
 											<th class="text-center">专门面向中小企业（含监狱企业）</th>
+											<th class="text-center">审核状态</th>
 				                            <th class="text-center">操作</th>
 				                        </tr>
 				                    </thead>
@@ -128,13 +130,10 @@
 				                    		<td>{{ purchase.isService==true?"是":"否" }}</td>
 				                    		<td>{{ purchase.isAsset==true?"是":"否" }}</td>
 				                    		<td>{{ purchase.isFaceMiddle==true?"是":"否" }}</td>
+				                    		<td>{{ purchase.auditState }}</td>
 				                    		<td>
-				                    			<button v-on:click="editPurchase(index)" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#edit">
-				                    				修改
-				                    			</button>
-				                    			<button v-on:click="deletePurchase(index)" class="btn btn-default btn-sm">
-				                    				删除
-				                    			</button>
+				                    			<button v-on:click="del(index)" class="btn btn-default btn-sm">删除</button>
+				                    			<button v-on:click="submit(index)" class="btn btn-primary btn-sm">提交</button>
 				                    		</td>
 				                    	</tr>
 				                    </tbody>
@@ -249,7 +248,7 @@
 									返回
 								</button>
 								<div class="pull-right">&nbsp;&nbsp;</div>
-								<button v-on:click="modifyPurchase" type="close" class="btn btn-primary btn-sm pull-right">
+								<button v-on:click="save" type="close" class="btn btn-primary btn-sm pull-right">
 									保存
 								</button>
 							</div>
@@ -307,6 +306,8 @@
 		<script type="text/javascript" src="../../components/jquery/zTree/js/jquery.ztree.excheck.js"></script>
 		<!-- ztree exhide包, ztree隐藏显示节点功能 -->
 		<script type="text/javascript" src="../../components/jquery/zTree/js/jquery.ztree.exhide.js"></script>
+		<!--  操作session需要的包  -->
+		<script type="text/javascript" src="../../components/jquery/jquerysession.js"></script>
 
 		<script type="text/javascript" src="../../components/bootstrap/js/bootstrap.min.js"></script>
 
@@ -315,6 +316,6 @@
 		<script type="text/javascript" src="../../components/ace/js/ace.min.js"></script>
 		
 		<script type="text/javascript" src="../../components/vue/vue.js"></script>
-		<script type="text/javascript" src="../../js/application/budget_app_add.js"></script>
+		<script type="text/javascript" src="../../js/application/budget_app_mod.js"></script>
 	</body>	
 </html>

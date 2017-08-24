@@ -38,4 +38,11 @@ public class UserServiceImpl implements UserService{
     public User findById(Integer userId) {
         return userDao.findById(userId);
     }
+
+	@Override
+	@Transactional
+	public User findByAccount(String account) {
+		
+		return userDao.findByAccount(account);
+	}
 }

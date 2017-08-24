@@ -32,8 +32,8 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 	@Override
 	@Transactional
-	public boolean del(Integer purchaseId) {
-		return purchaseDao.del(purchaseId);
+	public boolean del(Integer id) {
+		return purchaseDao.del(id);
 	}
 
 	@Override

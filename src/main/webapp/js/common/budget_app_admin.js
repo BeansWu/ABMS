@@ -39,7 +39,7 @@ var budget_app_admin = new Vue({
 					$.session.set("budgetApp", JSON.stringify(budgetApp));
 					var purchases = data["purchases"];
 					$.session.set("purchases", JSON.stringify(purchases));
-					window.location = "budget_app_mod.html";
+					window.location = "budget_app_info.html";
 					
 				}
 			});

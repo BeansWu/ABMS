@@ -61,11 +61,6 @@ public class BudgetApp implements Serializable {
      */
     @Column(length = 100, nullable = false)
     private String reason;
-    /**
-     * 审核状态, 默认为未提交
-     */
-    @Column(name = "audit_state", length = 2, nullable = false)
-    private AuditState auditState = AuditState.UNSUBMITTED;
 
     public Integer getId() {
         return id;
@@ -93,10 +88,6 @@ public class BudgetApp implements Serializable {
 
     public String getReason() {
         return reason;
-    }
-
-    public AuditState getAuditState() {
-        return auditState;
     }
 
     public void setId(Integer id) {
@@ -127,9 +118,6 @@ public class BudgetApp implements Serializable {
         this.reason = reason;
     }
 
-    public void setAuditState(AuditState auditState) {
-        this.auditState = auditState;
-    }
 
     public BudgetApp() {
 		super();
@@ -144,17 +132,5 @@ public class BudgetApp implements Serializable {
         this.reason = reason;
     }
 
-    @Override
-    public String toString() {
-        return "BudgetApp{" +
-                "id=" + id +
-                ", number='" + number + '\'' +
-                ", name='" + name + '\'' +
-                ", requiredTime='" + requiredTime + '\'' +
-                ", user=" + user +
-                ", fillDate=" + fillDate +
-                ", reason='" + reason + '\'' +
-                ", auditState=" + auditState +
-                '}';
-    }
+
 }

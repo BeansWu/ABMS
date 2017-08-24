@@ -24,7 +24,7 @@ var subscribe_add = new Vue({
 				name:'wze',
 			},
 			purchase:{
-				
+				id:''
 			},
 			paramAndRequire:'',
 			auditState:'SUBMITTED'
@@ -34,8 +34,8 @@ var subscribe_add = new Vue({
 	methods:{
 		handleChange(value) {
 			console.log(value);
-			var index = this.options[value[0]-1].children[value[1]-1].value;
-			this.subscribe.purchase = this.purchases[index];
+			alert(value);
+			this.subscribe.purchase.id = value[1];
 		},
 		
 		initSubscribes:function(){
@@ -115,14 +115,11 @@ var subscribe_add = new Vue({
 				contentType: "application/json",
 				data: JSON.stringify(this.subscribe),
 				success: function(data) {
-					switch(data["result"]) {
-						case"success":alert("提交成功");break;
-						case"failure":alert("提交失败");break;
-						default:alert("未知错误");
-					}
+					
 				}
 			})
 			this.dialogFormVisible = false;
+			location.reload(true);
 		}
 	}
 	

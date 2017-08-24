@@ -31,4 +31,9 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     public User findById(Integer userId) {
         return super.queryForBean("from User u where u.id = ?", userId);
     }
+
+	@Override
+	public User findByAccount(String account) {
+		return super.queryForBean("from User u where u.account = ?", account);
+	}
 }

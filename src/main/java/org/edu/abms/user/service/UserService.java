@@ -28,4 +28,11 @@ public interface UserService {
      * @return User
      */
     User findById(Integer userId);
+    
+    /**
+     * 通过账号查找用户
+     * @param account
+     * @return 用户实体
+     */
+    User findByAccount(String account); 
 }

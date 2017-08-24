@@ -35,4 +35,11 @@ public interface UserDao {
      * @return 操作结果
      */
     User findById(Integer userId);
+    
+    /**
+     * 通过账号查找
+     * @param account
+     * @return 用户实体
+     */
+    User findByAccount(String account);
 }

@@ -3,12 +3,8 @@
 	<head>
 		<title></title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="./components/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="./components/bootstrap/cssbootstrapValidator.css">
+		<link rel="stylesheet" type="text/css" href="../components/bootstrap/css/bootstrap.min.css">
 
-		<script type="text/javascript" src="./components/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="./components/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="./components/bootstrap/js/bootstrapValidator.js"></script>
 		<style type="text/css">
 			.background-image-holder{
 				position: absolute;
@@ -27,35 +23,26 @@
 
 	</head>
 	<body class="container">
-		<div class="modal background-image-holder overlay fadeIn" role="dialog" id="myModal" style="display: block;background: url(images/background-analytics.jpg) 50% 50%;">
+		<div class="modal background-image-holder overlay fadeIn" role="dialog" id="myModal" style="display: block;background: url(../images/background-analytics.jpg) 50% 50%;">
 			<div class="modal-dialog" id="modal" style="width: 350px; top:20%; left:30% ;opacity:0.8;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title text-primary">用户登录 / LOGIN</h4>
 					</div>
 					<div class="modal-body" style="margin: 10px">
-						<form class="form-horizontal" method="POST" action="" id="login">
+						<form class="form-horizontal" id="login">
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-									<input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名或邮箱">
+									<input type="text" id="account" name="account" class="form-control" placeholder="请输入用户名或邮箱">
 								</div>
-							</div><!-- username -->
+							</div><!-- account -->
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
 									<input type="password" id="password" name="password" class="form-control" placeholder="请输入密码">
 								</div>
 							</div><!-- password -->
-							<div class="form-group">
-								<div class="col-md-6 input-group">
-									<div class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span></div>
-									<input type="text" name="code" class="form-control" placeholder="验证码">
-								</div>
-								<div class="col-md-6">
-									<img src="">
-								</div>
-							</div><!-- 验证码 -->
 							<div class="form-group">
 								<div class="checkbox">
 									<label>
@@ -64,17 +51,37 @@
 								</div>
 							</div><!-- checkbox -->
 							<div class="form-group">
-								<button type="submit" class="btn btn-success btn-block">登录</button>
+								<button  type="button" id="btn_submit" class="btn btn-success btn-block">登录</button>
 							</div><!-- 登录按钮 -->
-							<!-- <div class="form-group pull-right">
+							<div class="form-group pull-right">
 								<a href="" class="text-primary">忘了密码？</a>|
 								<a href="" class="text-primary">注册账号 </a>|
 								<a href="" class="text-primary">意见反馈</a>
-							</div> -->
+							</div>
 						</form>
 					</div><!-- modal-body -->
 				</div><!-- modal-content -->
 			</div><!-- modal-dialog -->
 		</div>
 	</body>
+	<script type="text/javascript" src="../components/jquery/jquery-1.11.2.min.js"></script>
+	<script>
+		$('#btn_submit').click(function(){
+			var account = $('#account').val();
+			var password = $('#password').val();
+			$.post('../user/login',{"account": account, "password":password},function(data) {
+				switch(data){
+					case "user no exist": alert(data); break;
+					case "wrong password": alert(data); break;
+					case "COMMON": window.location = "./application/main.html"; break;
+					case "FACULTY_MGR": window.location = "./manager/main.html"; break;
+					case "FACULTY_LD": window.location = "./leader/main.html"; break;
+					case "ASSET_DEPT": window.location ="./asset/main.html"; break;
+					case "FIN_DEPT": window.location = "./finance/main.html"; break;
+					default:break;
+				}
+			})
+
+		});
+	</script>
 </html>

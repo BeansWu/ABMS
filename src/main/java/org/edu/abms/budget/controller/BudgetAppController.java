@@ -1,11 +1,12 @@
 package org.edu.abms.budget.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.edu.abms.budget.entity.BudgetApp;
 import org.edu.abms.budget.service.BudgetAppService;
+import org.edu.abms.purchase.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,28 +25,35 @@ public class BudgetAppController {
 	@Autowired
 	private BudgetAppService budgetService;
 	
+	@Autowired
+	private PurchaseService purchaseService;
+	
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
-	public String saveOrUpdate(@RequestBody BudgetApp budgetApp) {
-		if(budgetService.saveOrUpdate(budgetApp)){
-			return SUCCESS;
-		} else {
-			return FAILURE;
-		}
+	public BudgetApp saveOrUpdate(@RequestBody BudgetApp budgetApp) {
+		
+		budgetService.saveOrUpdate(budgetApp);
+		
+		return budgetService.findByNum(budgetApp.getNumber());
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/findAll", method = RequestMethod.GET)
 	public List<BudgetApp> findAll(@RequestParam("userId") Integer userId){
-		//System.out.println("接收到"+userId);
 		return budgetService.findAll(userId);
 		
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/modify", method = RequestMethod.POST)
-	public String modify(@RequestBody BudgetApp budgetApp, HttpSession session ){
-		session.setAttribute("budgetApp", budgetApp);
-		return SUCCESS;
+	@RequestMapping(value="/modify", method = RequestMethod.GET)
+	public Map<String, Object> modify(@RequestParam("budgetId") Integer budgetId){
+//		session.setAttribute("budgetApp", budgetService.get(budgetId));
+//		session.setAttribute("purchases", purchaseService.findAll(budgetId));
+//		System.out.println("------------"+session.getAttribute("budgetApp"));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("budgetApp", budgetService.get(budgetId));
+		map.put("purchases", purchaseService.findAll(budgetId));
+		return map;
 	}
+	
 }

@@ -26,11 +26,11 @@ public interface PurchaseDao {
 	boolean update(Purchase purchase);
 	
 	/** 
-	 *  删除采购项目明细
+	 *  通过采购品目编码删除采购项目明细
 	 * @param: purchaseId   
 	 * @return: 操作结果     
 	 */
-	boolean del(Integer purchaseId);
+	boolean del(Integer id);
 	
 	/** 
 	 *  查找所有采购项目(根据项目号)

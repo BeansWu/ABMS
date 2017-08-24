@@ -3,6 +3,7 @@ package org.edu.abms.purchase.service;
 import java.util.List;
 
 import org.edu.abms.purchase.entity.Purchase;
+import org.edu.abms.purchase.entity.PurchaseItem;
 
 
 /** 
@@ -21,10 +22,10 @@ public interface PurchaseService {
 	
 	/** 
 	 *  删除采购项目明细
-	 * @param:  purchaseID  
+	 * @param:  code 
 	 * @return: 操作结果     
 	 */
-	boolean del(Integer purchaseID);
+	boolean del(Integer id);
 	
 	/**
 	 * 查找所有采购项目明细（根据预算项目号）

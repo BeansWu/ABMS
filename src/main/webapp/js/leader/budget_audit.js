@@ -51,14 +51,7 @@ jQuery(function($){
 	});
 })
 	
-function findAll(){
-    $.get("../../purchase/findAll", function(data){
-        budget_audit.init(data);
-    });
-    alert('已发送请求');
-    
-}
-findAll();
+
 
 
 
@@ -70,8 +63,17 @@ var budget_audit = new Vue({
 	},
 	methods:{
 		init:function(data){
-			this.purchases = data;
-			alert(this.purchases[0].price);
+			var that = this;
+			$.ajax({
+				type:"get",
+				url:"../../purchase/findAll",
+				dataType:"json",
+				async:false,
+				success:function(data){
+					that.purchases = data;
+				}
+			});
+
 		},
 		
 		getChecked:function(){
@@ -134,7 +136,9 @@ var budget_audit = new Vue({
 			location.reload(true);
 		}
 	}
-})
+});
+
+budget_audit.init();
 
 
 
